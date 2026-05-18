@@ -1,0 +1,29 @@
+import { attributeChanged, define } from '@directive'
+import Echo, { dispatchEvent } from '@echo'
+
+@define('m-redirect')
+class Redirect extends Echo(HTMLElement) {
+  #href
+
+  get href() {
+    return (this.#href ??= '#')
+  }
+
+  @attributeChanged('href')
+  @dispatchEvent('href')
+  set href(value) {
+    this.#href = value
+  }
+
+  constructor() {
+    super()
+    this.style.setProperty('display', 'none')
+  }
+
+  go() {
+    history.pushState({}, '', this.href)
+    return this
+  }
+}
+
+export default Redirect

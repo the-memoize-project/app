@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "paths": {
+      "@directive": ["./packages/directive"],
+      "@dom": ["./packages/dom"],
+      "@echo": ["./packages/echo"],
+      "@elements": ["./packages/elements"],
+      "@event": ["./packages/event"],
+      "@polyfill": ["./packages/polyfill"],
+      "@renderer": ["./packages/renderer"],
+      "@result": ["./packages/result"],
+      "@router": ["./packages/router"],
+      "@spark": ["./packages/spark"]
+    }
+  }
+}

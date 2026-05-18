@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.12",
+    "@cloudflare/workers-types": "^4.20250511.0",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "wrangler": "^4.11.0"
+  },
+  "name": "memoize-app",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "check": "biome check --write .",
+    "deploy": "wrangler pages deploy",
+    "dev": "wrangler pages dev",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "prepare": "husky",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

@@ -1,8 +1,13 @@
 import { urlFor } from '@router'
 
 class Navigate {
-  static goToDashboard() {
+  static toDashboard() {
     history.pushState({}, '', urlFor('dashboard'))
+    return Navigate
+  }
+
+  static toSplash() {
+    history.pushState({}, '', urlFor('splash'))
     return Navigate
   }
 }

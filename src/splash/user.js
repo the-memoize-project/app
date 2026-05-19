@@ -1,8 +1,9 @@
+import cookie from '@cookie'
 import Result from '@result'
 
 class User {
-  static isItAuthenticated() {
-    return Result.Expired()
+  static isAuthenticated() {
+    return cookie.access_token ? Result.Authorized() : Result.Unauthorized()
   }
 }
 

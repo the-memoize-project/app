@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   resolve: {
     alias: {
+      '@cookie': resolve(__dirname, 'packages/cookie'),
       '@directive': resolve(__dirname, 'packages/directive'),
       '@dom': resolve(__dirname, 'packages/dom'),
       '@echo': resolve(__dirname, 'packages/echo'),

@@ -17,10 +17,9 @@ class Splash extends HTMLElement {
   }
 
   @willPaint
-  async [handle]() {
-    const auth = await User.isItAuthenticated()
-    auth.match({
-      Authenticated: () => Navigate.goToDashboard(),
+  [handle]() {
+    User.isAuthenticated().match({
+      Authorized: () => Navigate.goToDashboard(),
     })
     return this
   }

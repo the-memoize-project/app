@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "experimentalDecorators": true,
     "paths": {
+      "@cookie": ["./packages/cookie"],
       "@directive": ["./packages/directive"],
       "@dom": ["./packages/dom"],
       "@echo": ["./packages/echo"],

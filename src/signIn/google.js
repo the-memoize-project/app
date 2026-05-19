@@ -1,8 +1,7 @@
-import env from '@app/platform/env'
-import Result from '@app/result'
+import Result from '@result'
 
 class Google {
-  static async authorization(code) {
+  static async exchange(code) {
     const accessToken = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: {
@@ -10,16 +9,16 @@ class Google {
       },
       body: new URLSearchParams({
         code,
-        client_id: env.GOOGLE_CLIENT_ID,
-        client_secret: env.GOOGLE_CLIENT_SECRET,
-        redirect_uri: env.GOOGLE_REDIRECT_URI,
+        client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+        client_secret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET,
+        redirect_uri: import.meta.env.VITE_GOOGLE_REDIRECT_URI,
         grant_type: 'authorization_code',
       }),
     })
       .then((response) => response.json())
       .then((json) => json.access_token)
 
-    if (!accessToken) return Result.Error()
+    if (!accessToken) return Result.Unauthorized()
 
     const user = await fetch(
       'https://openidconnect.googleapis.com/v1/userinfo',
@@ -38,7 +37,7 @@ class Google {
         name: json.name,
       }))
 
-    return user ? Result.Ok(user) : Result.Error()
+    return user ? Result.Authorized(user) : Result.Unauthorized()
   }
 }
 

@@ -1,0 +1,21 @@
+import { css } from '@dom'
+
+function style() {
+  return css`
+    dashboard {
+      align-items: center;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing_inset-xs);
+      justify-content: start;
+      margin: 0 auto;
+      max-width: 425px;
+      min-height: calc(100svh - 144px);
+      padding: var(--spacing_inset-xs);
+      width: 100%;
+    }
+  `
+}
+
+export default style

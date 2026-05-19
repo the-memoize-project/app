@@ -16,8 +16,8 @@
   "scripts": {
     "build": "vite build",
     "check": "biome check --write .",
-    "deploy": "wrangler pages deploy",
-    "dev": "wrangler pages dev",
+    "deploy": "vite build && wrangler pages deploy",
+    "dev": "vite dev & wrangler pages dev",
     "format": "biome format --write .",
     "lint": "biome lint .",
     "prepare": "husky",

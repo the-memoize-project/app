@@ -9,8 +9,4 @@
   "observability": {
     "enabled": true
   },
-  "keep_names": true,
-  "build": {
-    "command": "bun run build"
-  }
 }

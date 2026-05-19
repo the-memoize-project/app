@@ -8,6 +8,11 @@ const cookie = new Proxy(
       document.cookie = `${key}=${value}; path=/; max-age=31536000`
       return true
     },
+
+    deleteProperty: (_, key) => {
+      document.cookie = `${key}=; path=/; max-age=0`
+      return true
+    },
   },
 )
 

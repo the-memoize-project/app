@@ -4,7 +4,6 @@ import component from './component'
 import Google from './google'
 import { hiddable } from './interfaces'
 import style from './style'
-import User from './user'
 
 @define('m-continue-with-google')
 @paint(component, style)
@@ -20,7 +19,6 @@ class ContinueWithGoogle extends HTMLElement {
 
   @connected
   [hiddable]() {
-    User.authenticated && this.remove()
     return this
   }
 }

@@ -3,10 +3,10 @@ import { paint, willPaint } from '@dom'
 import renderer from '@renderer'
 import router from '@router'
 import component from './component'
+import Google from './google'
 import { handle } from './interfaces'
 import Navigate from './navigate'
 import style from './style'
-import User from './user'
 
 @define('m-splash')
 @paint(component, style)
@@ -17,8 +17,9 @@ class Splash extends HTMLElement {
   }
 
   @willPaint
-  [handle]() {
-    User.isAuthenticated().match({
+  async [handle]() {
+    const authorization = await Google.isAuthorized()
+    authorization.match({
       Authorized: () => Navigate.goToDashboard(),
     })
     return this

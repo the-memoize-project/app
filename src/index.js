@@ -1,7 +1,9 @@
 import '@polyfill'
 import '@elements'
 
+import './dashboard'
 import './signIn'
+import './signOut'
 import './splash'
 
 import router from '@router'

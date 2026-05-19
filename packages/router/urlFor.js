@@ -1,11 +1,11 @@
 import listeners from './listeners'
 
 const urlFor = (name, params = {}) => {
-  const path = listeners.find(({ page }) => page?.name === name)?.path
-  if (!path) return '#'
+  const { path } = listeners.find(({ page }) => page?.name === name)
 
-  const pathname = path.replace(/:(\w+)/g, (_, key) => params[key] ?? `:${key}`)
-  return `${globalThis.location.origin}${pathname}`
+  return path
+    ? path.replace(/:(\w+)/g, (_, key) => params[key] ?? `:${key}`)
+    : '#'
 }
 
 export default urlFor

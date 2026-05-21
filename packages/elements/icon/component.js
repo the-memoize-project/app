@@ -1,7 +1,5 @@
-import medias from './medias'
-
-async function component(self) {
-  return (await medias[self.use]()).default
+function component(self) {
+  return self.use
 }
 
 export default component

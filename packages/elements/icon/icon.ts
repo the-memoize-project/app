@@ -12,7 +12,7 @@ class Icon extends Echo(HTMLElement) {
   #use
 
   get color() {
-    return (this.#color ??= 'primary')
+    return this.#color ? `var(--color-${this.#color})` : 'currentColor'
   }
 
   @attributeChanged('color')

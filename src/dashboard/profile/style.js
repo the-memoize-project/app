@@ -13,7 +13,9 @@ function style() {
 
         img {
           aspect-ratio: 1 / 1;
+          background-color: var(--color-master-light);
           border-radius: var(--border-radius-circular);
+          color: transparent;
           height: 120px;
         }
 

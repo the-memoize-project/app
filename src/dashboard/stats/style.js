@@ -12,7 +12,6 @@ function style() {
       stat {
         align-items: center;
         display: flex;
-        flex: 1;
         gap: var(--spacing_inset-quarck);
         justify-content: center;
 

@@ -1,43 +1,27 @@
+import cookie from '@cookie'
 import { define } from '@directive'
-import { paint, willPaint } from '@dom'
+import { paint } from '@dom'
 import component from './component'
-import { hydrate } from './interfaces'
-import Progress from './progress'
 import style from './style'
-import User from './user'
 
 @define('m-dashboard-profile')
 @paint(component, style)
 class Profile extends HTMLElement {
-  #user
-  #progress
-
   get avatar() {
-    return this.#user.avatar
+    return cookie.avatar_url
   }
 
   get goal() {
-    return this.#user.goal
+    return 'Quero gravar OOP em JS puro e Web Components, dominar patterns e perf, liderar times e entregar UIs modulares e ultra-rápidas. ⚡'
   }
 
   get name() {
-    return this.#user.name
-  }
-
-  get progress() {
-    return (this.#progress.total ??= {})
+    return cookie.name
   }
 
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
-  }
-
-  @willPaint
-  async [hydrate]() {
-    this.#user = await User.logged()
-    this.#progress = await Progress.ofUserLogged()
-    return this
   }
 }
 

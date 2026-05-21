@@ -1,36 +1,28 @@
 import { define } from '@directive'
-import { paint, willPaint } from '@dom'
+import { paint } from '@dom'
 import component from './component'
-import { hydrate } from './interfaces'
 import style from './style'
-import Summary from './summary'
 
 @define('m-dashboard-stats')
 @paint(component, style)
 class Stats extends HTMLElement {
-  #summary
+  #data
 
   get cards() {
-    return this.#summary.cards
+    return this.#data?.cards ?? 999
   }
 
   get reviews() {
-    return this.#summary.reviews
+    return this.#data?.reviews ?? 87
   }
 
   get time() {
-    return this.#summary.time
+    return this.#data?.time ?? '1d 18h 6m'
   }
 
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
-  }
-
-  @willPaint
-  async [hydrate]() {
-    this.#summary = await Summary.ofUserLogged()
-    return this
   }
 }
 

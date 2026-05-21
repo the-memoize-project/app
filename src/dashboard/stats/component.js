@@ -3,18 +3,18 @@ import { html } from '@dom'
 function component(self) {
   return html`
     <m-stack direction="row" align="center" justify="center" spacing="md">
-      <stat>
-        <m-icon use="cognition_2" size="sm" color="master-dark"></m-icon>
-        <m-text size="sm" weight="bold">${self.cards}</m-text>
-      </stat>
-      <stat>
-        <m-icon use="calendar_check" size="sm" color="master-dark"></m-icon>
-        <m-text size="sm" weight="bold">${self.reviews}</m-text>
-      </stat>
-      <stat>
-        <m-icon use="timer" size="sm" color="master-dark"></m-icon>
-        <m-text size="sm" weight="bold">${self.time}</m-text>
-      </stat>
+      <m-stack align="center" spacing="nano" width="auto">
+        <m-icon use="cognition_2" size="xs" color="master-dark"></m-icon>
+        <m-text size="xs" weight="bold">${self.cards}</m-text>
+      </m-stack>
+      <m-stack align="center" spacing="nano" width="auto">
+        <m-icon use="calendar_check" size="xs" color="master-dark"></m-icon>
+        <m-text size="xs" weight="bold">${self.reviews}</m-text>
+      </m-stack>
+      <m-stack align="center" spacing="nano" width="auto">
+        <m-icon use="timer" size="xs" color="master-dark"></m-icon>
+        <m-text size="xs" weight="bold">${self.time}</m-text>
+      </m-stack>
     </m-stack>
   `
 }

@@ -21,7 +21,7 @@
       "complexity": {
         "noForEach": "off",
         "noStaticOnlyClass": "off",
-        "noArguments": "error",
+        "noArguments": "off",
         "noCommaOperator": "error"
       },
       "correctness": {

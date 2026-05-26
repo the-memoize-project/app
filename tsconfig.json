@@ -3,17 +3,19 @@
     "baseUrl": ".",
     "experimentalDecorators": true,
     "paths": {
-      "@cookie": ["./packages/cookie"],
-      "@directive": ["./packages/directive"],
-      "@dom": ["./packages/dom"],
-      "@echo": ["./packages/echo"],
-      "@elements": ["./packages/elements"],
-      "@event": ["./packages/event"],
-      "@polyfill": ["./packages/polyfill"],
-      "@renderer": ["./packages/renderer"],
-      "@result": ["./packages/result"],
-      "@router": ["./packages/router"],
-      "@spark": ["./packages/spark"]
+      "@cookie/*": ["packages/cookie/*"],
+      "@directive/*": ["packages/directive/*"],
+      "@dom/*": ["packages/dom/*"],
+      "@echo/*": ["packages/echo/*"],
+      "@elements/*": ["packages/elements/*"],
+      "@event/*": ["packages/event/*"],
+      "@middleware/*": ["packages/middleware/*"],
+      "@mixin/*": ["packages/mixin/*"],
+      "@polyfill/*": ["packages/polyfill/*"],
+      "@renderer/*": ["packages/renderer/*"],
+      "@result/*": ["packages/result/*"],
+      "@router/*": ["packages/router/*"],
+      "@spark/*": ["packages/spark/*"]
     }
   }
 }

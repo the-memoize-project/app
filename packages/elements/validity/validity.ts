@@ -1,17 +1,24 @@
-import { attributeChanged, define } from '@directive'
+import { attributeChanged, connected, define, disconnected } from '@directive'
 import { paint } from '@dom'
 import Echo from '@echo'
-import { prevent } from '@event'
-import relay from '@relay'
-import component from './component.js'
-import { setState } from './interfaces.js'
-import style from './style.js'
+import component from './component'
+import { reflectable, resettable, slottable, validatable } from './interfaces'
+import style from './style'
 
 @define('m-validity')
 @paint(component, style)
 class Validity extends Echo(HTMLElement) {
+  #controller
   #internals
   #state
+
+  get controller() {
+    return (this.#controller ??= new AbortController())
+  }
+
+  get internals() {
+    return (this.#internals ??= this.attachInternals())
+  }
 
   get state() {
     return this.#state
@@ -25,15 +32,47 @@ class Validity extends Echo(HTMLElement) {
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
-    this.#internals = this.attachInternals()
   }
 
-  @relay.change()
-  @relay.invalid(prevent)
-  [setState]() {
+  @disconnected
+  remove() {
+    super.remove()
+    this.controller.abort()
+    return this
+  }
+
+  @connected
+  async [reflectable]() {
+    await customElements.whenDefined(this.parentElement?.localName)
+
+    for (const event of ['change', 'invalid']) {
+      this.parentElement.addEventListener(event, this[validatable].bind(this), {
+        signal: this.controller.signal,
+      })
+    }
+
+    this.parentElement.addEventListener('reset', this[resettable].bind(this), {
+      signal: this.controller.signal,
+    })
+
+    return this
+  }
+
+  [resettable]() {
+    this.internals.states.delete('invalid')
+    return this
+  }
+
+  @connected
+  [slottable]() {
+    this.setAttribute('slot', 'validity')
+    return this
+  }
+
+  [validatable]() {
     this.parentElement.validity[this.state]
-      ? this.#internals.states.add('invalid')
-      : this.#internals.states.delete('invalid')
+      ? this.internals.states.add('invalid')
+      : this.internals.states.delete('invalid')
     return this
   }
 }

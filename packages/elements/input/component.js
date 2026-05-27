@@ -1,26 +1,28 @@
 import { html } from '@dom'
 
-function component(self) {
-  return html`
-    <label for="${self.name}">
-      ${self.label}
-    </label>
-    <slot name="preview"></slot>
-    <input
-      autocomplete="${self.autocomplete}"
-      id="${self.name}"
-      inputmode="${self.inputMode}"
-      name="${self.name}"
-      placeholder="${self.placeholder}"
-      type="${self.type}"
-      value="${self.value}"
-      ${self.maxlength ? `maxlength="${self.maxlength}"` : ''}
-      ${self.minlength ? `minlength="${self.minlength}"` : ''}
-      ${self.required ? 'required' : ''}
-    />
-    <slot name="hint"></slot>
-    <slot></slot>
-  `
-}
+const component = (input) => html`
+	<label for="${input.id}">
+		<slot name="label"></slot>
+	</label>
+	<input
+		${input.id ? `id="${input.id}"` : ''}
+		${input.inputMode ? `inputmode="${input.inputMode}"` : ''}
+		${input.max ? `max="${input.max}"` : ''}
+		${input.maxLength ? `maxlength="${input.maxLength}"` : ''}
+		${input.min ? `min="${input.min}"` : ''}
+		${input.minLength ? `minlength="${input.minLength}"` : ''}
+		${input.name ? `name="${input.name}"` : ''}
+		${input.pattern ? `pattern="${input.pattern}"` : ''}
+		${input.placeholder ? `placeholder="${input.placeholder}"` : ''}
+		${input.step ? `step="${input.step}"` : ''}
+		${input.type ? `type="${input.type}"` : ''}
+		${input.value ? `value="${input.value}"` : ''}
+		${input.disabled ? 'disabled' : ''}
+		${input.readonly ? 'readonly' : ''}
+		${input.required ? 'required' : ''}
+	/>
+	<slot name="helper"></slot>
+	<slot name="validity"></slot>
+`
 
 export default component

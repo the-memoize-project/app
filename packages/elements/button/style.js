@@ -18,11 +18,11 @@ function style(self) {
         font-size: var(--font-size-xxs);
         font-weight: var(--font-weight-medium);
         gap: var(--spacing_inset-nano);
-        height: 42px;
+        height: 40px;
         justify-content: center;
         letter-spacing: 0.38px;
         line-height: var(--line-height-default);
-        min-width: 42px;
+        min-width: 40px;
         padding: 0 var(--spacing_inset-xs);
         position: relative;
         transition: all 0.2s ease-out;
@@ -38,6 +38,14 @@ function style(self) {
           z-index: 1;
           width: 100%;
         }
+      }
+    } 
+
+    :host([icononly]) {
+      width: 40px;
+
+      button {
+        padding: 0;
       }
     }
 
@@ -71,7 +79,7 @@ function style(self) {
         border: var(--border-width-thin) solid transparent;
         color: var(--color-${self.color});
         padding: 0;
-        width: 42px;
+        width: 40px;
       }
     }
   `

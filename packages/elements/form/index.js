@@ -1,1 +1,1 @@
-export { default } from './form'
+import './form'

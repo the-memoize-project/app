@@ -1,2 +1,3 @@
-export const reset = Symbol('reset')
-export const submit = Symbol('submit')
+export const render = Symbol('render')
+export const resetted = Symbol('resetted')
+export const submitted = Symbol('submitted')

@@ -1,19 +1,25 @@
-import { define } from '@directive'
-import { paint } from '@dom'
-import Echo, { dispatchEvent } from '@echo'
-import on, { formData, prevent, stop } from '@event'
-import component from './component.js'
-import { reset, submit } from './interfaces.js'
-import style from './style.js'
-import Template from './template'
+import { connected, define } from '@directive'
+import { paint, repaint } from '@dom'
+import Echo from '@echo'
+import on, { customEvent, formData, prevent, stop } from '@event'
+import { Hidden, Template } from '@mixin'
+import component from './component'
+import { render, resetted, submitted } from './interfaces'
+import interpolate from './interpolate'
+import style from './style'
 
 @define('m-form')
 @paint(component, style)
-class Form extends Echo(HTMLElement) {
-  #template = Template.from(this)
+class Form extends Echo(Hidden(Template(HTMLElement))) {
+  #internals
+  #textContent
 
-  get content() {
-    return this.#template.content
+  get internals() {
+    return (this.#internals ??= this.attachInternals())
+  }
+
+  get textContent() {
+    return (this.#textContent ??= '')
   }
 
   constructor() {
@@ -21,30 +27,37 @@ class Form extends Echo(HTMLElement) {
     this.attachShadow({ mode: 'open' })
   }
 
+  @connected
+  @repaint
+  [render](payload) {
+    requestAnimationFrame(() => {
+      this.#textContent = interpolate(super.template, payload)
+    })
+    return this
+  }
+
   reset() {
-    const init = { bubbles: true, cancelable: true }
-    const event = new Event('reset', init)
-    this.shadowRoot.querySelector('form').dispatchEvent(event)
+    const form = this.shadowRoot.querySelector('form')
+    form.dispatchEvent(new Event('reset', { bubbles: true, cancelable: true }))
     return this
   }
 
   @on.reset('form', stop)
-  @dispatchEvent('reset')
-  [reset]() {
-    return {}
+  [resetted]() {
+    this.dispatchEvent(customEvent('resetted', {}))
+    return this
   }
 
   submit() {
-    const init = { bubbles: true, cancelable: true }
-    const event = new Event('submit', init)
-    this.shadowRoot.querySelector('form').dispatchEvent(event)
+    const form = this.shadowRoot.querySelector('form')
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))
     return this
   }
 
   @on.submit('form', prevent, stop, formData)
-  @dispatchEvent('submit')
-  [submit](data) {
-    return data
+  [submitted](data) {
+    this.dispatchEvent(customEvent('submitted', data))
+    return this
   }
 }
 

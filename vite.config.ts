@@ -10,6 +10,8 @@ export default defineConfig({
       '@echo': resolve(__dirname, 'packages/echo'),
       '@elements': resolve(__dirname, 'packages/elements'),
       '@event': resolve(__dirname, 'packages/event'),
+      '@middleware': resolve(__dirname, 'packages/middleware'),
+      '@mixin': resolve(__dirname, 'packages/mixin'),
       '@polyfill': resolve(__dirname, 'packages/polyfill'),
       '@renderer': resolve(__dirname, 'packages/renderer'),
       '@result': resolve(__dirname, 'packages/result'),

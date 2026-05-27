@@ -10,7 +10,7 @@ function style() {
       gap: var(--spacing_inset-xs);
       justify-content: end;
       margin: 0 auto;
-      max-width: 425px;
+      max-width: 480px;
       min-height: calc(100svh - 144px);
       padding: var(--spacing_inset-xs);
       width: 100%;

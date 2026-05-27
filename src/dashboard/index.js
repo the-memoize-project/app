@@ -1,4 +1,5 @@
 import './profile'
 import './stats'
 import './routine'
+import './decks'
 import './dashboard'

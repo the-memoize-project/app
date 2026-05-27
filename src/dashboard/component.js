@@ -9,6 +9,7 @@ const component = () =>
       <m-dashboard-profile></m-dashboard-profile>
       <m-dashboard-stats></m-dashboard-stats>
       <m-dashboard-routine></m-dashboard-routine>
+      <m-dashboard-decks></m-dashboard-decks>
     </dashboard>
     <m-footer>
       <m-text slot="leading" size="xxxs">© 2026 Memoize · Todos os direitos reservados</m-text>

@@ -12,7 +12,7 @@ function style() {
       padding: var(--spacing_inset-xs);
       width: 100%;
 
-      days {
+      week {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -38,7 +38,7 @@ function style() {
       }
 
 
-      footer {
+      prompt {
         align-items: center;
         background-color: var(--color-master-lightest);
         border-radius: var(--border-radius-sm);

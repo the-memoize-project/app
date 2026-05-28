@@ -1,8 +1,9 @@
 import { attributeChanged, define } from '@directive'
-import Echo, { dispatchEvent } from '@echo'
+import Echo from '@echo'
+import Headless from '@mixin/headless'
 
 @define('m-redirect')
-class Redirect extends Echo(HTMLElement) {
+class Redirect extends Headless(Echo(HTMLElement)) {
   #href
 
   get href() {
@@ -10,14 +11,8 @@ class Redirect extends Echo(HTMLElement) {
   }
 
   @attributeChanged('href')
-  @dispatchEvent('href')
   set href(value) {
     this.#href = value
-  }
-
-  constructor() {
-    super()
-    this.style.setProperty('display', 'none')
   }
 
   go() {

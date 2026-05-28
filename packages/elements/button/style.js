@@ -24,30 +24,10 @@ function style(self) {
         line-height: var(--line-height-default);
         min-width: 40px;
         padding: 0 var(--spacing_inset-xs);
-        position: relative;
         transition: all 0.2s ease-out;
         width: 100%;
-
-        &:after {
-          content: "";
-          display: block;
-          height: 100%;
-          left: 0;
-          position: absolute;
-          top: 0;
-          z-index: 1;
-          width: 100%;
-        }
       }
     } 
-
-    :host([icononly]) {
-      width: 40px;
-
-      button {
-        padding: 0;
-      }
-    }
 
     :host(:state(naked)) {
       button {
@@ -81,6 +61,14 @@ function style(self) {
         padding: 0;
         width: 40px;
       }
+    }
+
+    :host(:state(hidden)) {
+      display: none;
+    }
+
+    ::slotted(*) {
+      pointer-events: none;
     }
   `
 }

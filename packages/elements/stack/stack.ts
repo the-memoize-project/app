@@ -1,33 +1,25 @@
-import {
-  attributeChanged,
-  booleanAttribute,
-  define,
-  resizing,
-} from '@directive'
-import { didPaint, paint, repaint } from '@dom'
-import Echo, { dispatchEvent } from '@echo'
-import on from '@event'
+import { attributeChanged, define } from '@directive'
+import { paint, retouch } from '@dom'
+import Echo from '@echo'
+import { Height, Hidden, Width } from '@mixin'
 import component from './component.js'
-import { setDisplay } from './interfaces.js'
 import style from './style.js'
 
 @define('m-stack')
 @paint(component, style)
-class Stack extends Echo(HTMLElement) {
+class Stack extends Hidden(Width(Height(Echo(HTMLElement)))) {
   #align
   #direction
-  #height
-  #hidden
+  #internals
   #justify
   #spacing
-  #width
 
   get align() {
     return (this.#align ??= 'start')
   }
 
   @attributeChanged('align')
-  @repaint
+  @retouch
   set align(value) {
     this.#align = value
   }
@@ -37,29 +29,13 @@ class Stack extends Echo(HTMLElement) {
   }
 
   @attributeChanged('direction')
-  @repaint
+  @retouch
   set direction(value) {
     this.#direction = value
   }
 
-  get height() {
-    return (this.#height ??= 'auto')
-  }
-
-  @attributeChanged('height', resizing)
-  @repaint
-  set height(value) {
-    this.#height = value
-  }
-
-  get hidden() {
-    return (this.#hidden ??= false)
-  }
-
-  @attributeChanged('hidden', booleanAttribute)
-  @repaint
-  set hidden(value) {
-    this.#hidden = value
+  get internals() {
+    return (this.#internals ??= this.attachInternals())
   }
 
   get justify() {
@@ -67,7 +43,7 @@ class Stack extends Echo(HTMLElement) {
   }
 
   @attributeChanged('justify')
-  @repaint
+  @retouch
   set justify(value) {
     this.#justify = value
   }
@@ -77,38 +53,14 @@ class Stack extends Echo(HTMLElement) {
   }
 
   @attributeChanged('spacing')
-  @repaint
+  @retouch
   set spacing(value) {
     this.#spacing = value
-  }
-
-  get width() {
-    return (this.#width ??= '100%')
-  }
-
-  @attributeChanged('width', resizing)
-  @repaint
-  set width(value) {
-    this.#width = value
   }
 
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
-  }
-
-  @on.click('*')
-  @dispatchEvent('click')
-  click() {
-    return this
-  }
-
-  @didPaint
-  [setDisplay]() {
-    this.hidden
-      ? this.style.setProperty('display', 'none')
-      : this.style.removeProperty('display')
-    return this
   }
 }
 

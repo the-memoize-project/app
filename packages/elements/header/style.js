@@ -1,13 +1,13 @@
 import { css } from '@dom'
 
-function style(self) {
+function style() {
   return css`
     :host {
-      display: flex;
+      box-sizing: border-box;
       height: 72px;
+      width: 100%;
 
       header {
-        background-color: var(--color-${self.color});
         box-sizing: border-box;
         width: 100svw;
 

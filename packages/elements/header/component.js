@@ -5,7 +5,9 @@ function component() {
     <header>
       <container>
         <leading>
-          <slot name="leading"></slot>
+          <slot name="leading">
+            <m-logo></m-logo>
+          </slot>
         </leading>
         <trailing>
           <slot name="trailing"></slot>

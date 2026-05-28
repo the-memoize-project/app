@@ -5,9 +5,9 @@ function component() {
   return html`
     <header>
       <m-text size="xs" family="highlight" weight="bold">Coleções</m-text>
-      <m-button name="create-deck" variant="link" icononly>
+      <m-button name="create-deck" variant="icon">
         <m-icon use="add" size="sm" color="primary"></m-icon>
-        <m-redirect on="create-deck/click:method/go" href="${urlFor('createDeck')}"></m-redirect>
+        <m-redirect on="create-deck/clicked:method/go" href="${urlFor('createDeck')}"></m-redirect>
       </m-button>
     </header>
     <grid>

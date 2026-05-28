@@ -1,6 +1,6 @@
 import { css } from '@dom'
 
-const style = (label) =>
+const style = () =>
   css`
     :host {
       box-sizing: border-box;
@@ -10,11 +10,7 @@ const style = (label) =>
       font-size: var(--font-size-xxs);
       font-weight: var(--font-weight-medium);
       line-height: var(--line-height-default);
-      text-align: ${label.align};
-    }
-
-    :host(:state(hidden)) {
-      display: none;
+      text-align: left;
     }
   `
 

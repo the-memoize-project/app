@@ -4,9 +4,9 @@ import { urlFor } from '@router'
 const component = () =>
   html`
     <m-header>
-      <m-button name="back-to-dashabord" slot="leading" variant="link" icononly>
+      <m-button name="back-to-dashabord" slot="leading" variant="icon">
         <m-icon use="arrow_back" size="sm" color="primary"></m-icon>
-        <m-redirect on="back-to-dashabord/click:method/go" href="${urlFor('dashboard')}"></m-redirect>
+        <m-redirect on="back-to-dashabord/clicked:method/go" href="${urlFor('dashboard')}"></m-redirect>
       </m-button>
     </m-header>
     <create-deck>

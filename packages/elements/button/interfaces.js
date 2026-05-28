@@ -1,2 +1,2 @@
 export const dispatchFormAction = Symbol('dispatchFormAction')
-export const setState = Symbol('setState')
+export const variantable = Symbol('variantable')

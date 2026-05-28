@@ -1,27 +1,27 @@
 import { attributeChanged, define } from '@directive'
-import { paint, repaint } from '@dom'
+import { paint, retouch } from '@dom'
 import Echo, { dispatchEvent } from '@echo'
 import on, { stop } from '@event'
+import { before } from '@middleware'
+import { Hidden, Value, Width } from '@mixin'
 import component from './component.js'
-import { setState } from './interfaces.js'
+import { variantable } from './interfaces.js'
 import style from './style.js'
 
 @define('m-button')
 @paint(component, style)
-class Button extends Echo(HTMLElement) {
+class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
   #color
   #internals
   #type
-  #value
   #variant
-  #width
 
   get color() {
     return (this.#color ??= 'primary')
   }
 
   @attributeChanged('color')
-  @repaint
+  @retouch
   set color(value) {
     this.#color = value
   }
@@ -31,19 +31,8 @@ class Button extends Echo(HTMLElement) {
   }
 
   @attributeChanged('type')
-  @repaint
   set type(value) {
     this.#type = value
-  }
-
-  get value() {
-    return this.#value
-  }
-
-  @attributeChanged('value')
-  @repaint
-  set value(value) {
-    this.#value = value
   }
 
   get variant() {
@@ -51,20 +40,9 @@ class Button extends Echo(HTMLElement) {
   }
 
   @attributeChanged('variant')
-  @repaint
+  @before(variantable)
   set variant(value) {
     this.#variant = value
-    this[setState](value)
-  }
-
-  get width() {
-    return (this.#width ??= 'auto')
-  }
-
-  @attributeChanged('width')
-  @repaint
-  set width(value) {
-    this.#width = value
   }
 
   static get formAssociated() {
@@ -73,12 +51,12 @@ class Button extends Echo(HTMLElement) {
 
   constructor() {
     super()
-    this.attachShadow({ mode: 'open' })
+    this.attachShadow({ mode: 'open', delegatesFocus: true })
     this.#internals = this.attachInternals()
   }
 
   @on.click('*', stop)
-  @dispatchEvent('click')
+  @dispatchEvent('clicked')
   click() {
     switch (this.type) {
       case 'submit':
@@ -91,8 +69,8 @@ class Button extends Echo(HTMLElement) {
     return this.value
   }
 
-  [setState](variant) {
-    this.#internals.states.delete(variant)
+  [variantable](variant) {
+    this.#internals.states.delete(this.variant)
     this.#internals.states.add(variant)
     return this
   }

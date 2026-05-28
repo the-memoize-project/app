@@ -1,5 +1,5 @@
 import { attributeChanged, define } from '@directive'
-import { paint, repaint } from '@dom'
+import { paint, repaint, retouch } from '@dom'
 import Echo from '@echo'
 import component from './component.js'
 import style from './style.js'
@@ -16,7 +16,7 @@ class Icon extends Echo(HTMLElement) {
   }
 
   @attributeChanged('color')
-  @repaint
+  @retouch
   set color(value) {
     this.#color = value
   }
@@ -26,7 +26,7 @@ class Icon extends Echo(HTMLElement) {
   }
 
   @attributeChanged('size')
-  @repaint
+  @retouch
   set size(value) {
     this.#size = value
   }

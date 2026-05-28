@@ -11,6 +11,10 @@ function style(self) {
       justify-content: ${self.justify};
       width: ${self.width};
     }
+
+    :host(:state(hidden)) {
+      display: none;
+    }
   `
 }
 

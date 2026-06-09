@@ -17,6 +17,7 @@ export default defineConfig({
       '@result': resolve(__dirname, 'packages/result'),
       '@router': resolve(__dirname, 'packages/router'),
       '@spark': resolve(__dirname, 'packages/spark'),
+      '@storage': resolve(__dirname, 'packages/storage'),
     },
   },
   build: {

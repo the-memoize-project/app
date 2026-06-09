@@ -15,7 +15,9 @@
       "@renderer/*": ["packages/renderer/*"],
       "@result/*": ["packages/result/*"],
       "@router/*": ["packages/router/*"],
-      "@spark/*": ["packages/spark/*"]
+      "@spark/*": ["packages/spark/*"],
+      "@storage": ["packages/storage/index.js"],
+      "@storage/*": ["packages/storage/*"]
     }
   }
 }

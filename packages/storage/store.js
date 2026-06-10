@@ -21,11 +21,11 @@ class Store {
 
       created.onsuccess = () => {
         const found = store.get(created.result)
-        found.onsuccess = () => resolve(found.result)
-        found.onerror = () => reject(found.error)
+        found.onsuccess = () => resolve({ data: found.result })
+        found.onerror = () => reject({ error: found.error })
       }
 
-      created.onerror = () => reject(created.error)
+      created.onerror = () => reject({ error: created.error })
     })
   }
 
@@ -38,8 +38,8 @@ class Store {
       const store = transaction.objectStore(this.#storeName)
       const removed = store.delete(id)
 
-      removed.onsuccess = () => resolve()
-      removed.onerror = () => reject(removed.error)
+      removed.onsuccess = () => resolve({ data: null })
+      removed.onerror = () => reject({ error: removed.error })
     })
   }
 
@@ -52,8 +52,8 @@ class Store {
       const store = transaction.objectStore(this.#storeName)
       const found = id ? store.get(id) : store.getAll()
 
-      found.onsuccess = () => resolve(found.result)
-      found.onerror = () => reject(found.error)
+      found.onsuccess = () => resolve({ data: found.result })
+      found.onerror = () => reject({ error: found.error })
     })
   }
 
@@ -68,11 +68,11 @@ class Store {
 
       found.onsuccess = () => {
         const saved = store.put({ ...found.result, ...data })
-        saved.onsuccess = () => resolve()
-        saved.onerror = () => reject(saved.error)
+        saved.onsuccess = () => resolve({ data: null })
+        saved.onerror = () => reject({ error: saved.error })
       }
 
-      found.onerror = () => reject(found.error)
+      found.onerror = () => reject({ error: found.error })
     })
   }
 

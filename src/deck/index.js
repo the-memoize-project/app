@@ -1,3 +1,3 @@
 import './create'
-import './update'
+import './edit'
 import './deck'

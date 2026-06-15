@@ -17,6 +17,8 @@ const component = () =>
       <m-form>
         <template>
           <m-fileupload name="cover" width="fill" required>
+            <m-label>Imagem de Capa</m-label>
+            <m-helper>Selecione uma imagem para representar a coleção</m-helper>
             <m-validity state="valueMissing">Imagem de capa é obrigatória</m-validity>
           </m-fileupload>
           <m-input name="name" width="fill" required>

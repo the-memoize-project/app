@@ -7,10 +7,12 @@ const style = (fileupaload) => css`
     flex-direction: column;
     gap: var(--spacing-nano);
     position: relative;
+    user-select: none;
     width: ${fileupaload.width};
 
     label {
       align-items: center;
+      aspect-ratio: 1.95/1;
       background-color: transparent;
       border: var(--border-width-hairline) solid var(--color-master-light);
       border-radius: var(--border-radius-sm);
@@ -44,8 +46,9 @@ const style = (fileupaload) => css`
     }
 
     preview {
+      aspect-ratio: 1.95/1;
+      box-sizing: border-box;
       display: ${fileupaload.file ? 'block' : 'none'};
-      height: 100%;
       left: 0;
       position: absolute;
       top: 0;

@@ -13,7 +13,7 @@ const component = (fileupload) =>
       </m-stack>
     </label>
     <preview>
-      <img src="${fileupload.file}" />
+      <img src="${fileupload.file}" loading="lazy" />
       <m-button color="danger" variant="icon">
         <m-icon use="delete" size="sm"></m-icon>
       </m-button>

@@ -21,6 +21,7 @@ class Store {
 
       created.onsuccess = () => {
         const found = store.get(created.result)
+
         found.onsuccess = () => resolve({ data: found.result })
         found.onerror = () => reject({ error: found.error })
       }
@@ -68,6 +69,7 @@ class Store {
 
       found.onsuccess = () => {
         const saved = store.put({ ...found.result, ...data })
+
         saved.onsuccess = () => resolve({ data: null })
         saved.onerror = () => reject({ error: saved.error })
       }

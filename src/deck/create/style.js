@@ -2,7 +2,7 @@ import { css } from '@dom'
 
 function style() {
   return css`
-    create-deck {
+    main {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;

@@ -9,7 +9,6 @@ const style = (textarea) =>
       flex-direction: column;
       gap: var(--spacing-nano);
       width: ${textarea.width};
-      width: var(--width-${textarea.width}, ${textarea.width});
 
       textarea {
         appearance: none;

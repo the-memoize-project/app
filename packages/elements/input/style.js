@@ -9,7 +9,6 @@ const style = (input) =>
 			flex-direction: column;
 			gap: var(--spacing-nano);
 			width: ${input.width};
-			width: var(--width-${input.width}, ${input.width});
 
 			input {
 				appearance: none;

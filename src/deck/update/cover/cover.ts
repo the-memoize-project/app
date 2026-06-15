@@ -5,7 +5,7 @@ import component from './component'
 import { change, reportable } from './interfaces'
 import style from './style'
 
-@define('create-deck-cover')
+@define('update-deck-cover')
 @paint(component, style)
 class Cover extends HTMLElement {
   #controller

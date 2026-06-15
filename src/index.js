@@ -1,8 +1,8 @@
 import '@polyfill'
 import '@elements'
 
-import './createDeck'
 import './dashboard'
+import './deck'
 import './signIn'
 import './signOut'
 import './splash'

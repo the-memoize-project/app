@@ -2,14 +2,15 @@ import { define } from '@directive'
 import { paint } from '@dom'
 import on, { detail } from '@event'
 import renderer from '@renderer'
-import router, { urlFor } from '@router'
-import DB from '@storage'
+import router from '@router'
 import component from './component'
+import Deck from './deck'
+import Navigate from './navigate'
 import style from './style'
 
-@define('m-create-deck')
+@define('m-deck-create')
 @paint(component, style)
-class CreateDeck extends HTMLElement {
+class Create extends HTMLElement {
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
@@ -17,17 +18,19 @@ class CreateDeck extends HTMLElement {
 
   @on.submitted('m-form', detail)
   async persist(data) {
-    const db = await DB.open()
-    const deck = await db.deck.add(data)
-    history.pushState({}, '', urlFor('deck', deck))
+    const deck = await Deck.create(data)
+    deck.match({
+      ok: ({ id }) => Navigate.goToDeck(id),
+      error: () => Navigate.goToError(),
+    })
     return this
   }
 
   static {
     router('/deck/create', function createDeck() {
-      renderer('<m-create-deck></m-create-deck>')
+      renderer('<m-deck-create></m-deck-create>')
     })
   }
 }
 
-export default CreateDeck
+export default Create

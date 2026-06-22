@@ -32,7 +32,7 @@ class FileUpload extends Echo(Hidden(Width(HTMLElement))) {
     return (this.#base64 ??= '')
   }
 
-  @attributeChanged('value')
+  @attributeChanged('file')
   @around(reflectable)
   @around(validatable)
   @around(dispatch)

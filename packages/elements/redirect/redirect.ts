@@ -1,6 +1,6 @@
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
-import Headless from '@mixin/headless'
+import { Headless } from '@mixin'
 
 @define('m-redirect')
 class Redirect extends Headless(Echo(HTMLElement)) {

@@ -27,8 +27,11 @@ class State {
     this.#name = name
   }
 
-  static create({ cover, description, id, name } = {}) {
-    return new State(cover, description, id, name)
+  static create(data = []) {
+    return data.map(
+      ({ cover, description, id, name } = {}) =>
+        new State(cover, description, id, name),
+    )
   }
 }
 

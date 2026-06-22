@@ -5,6 +5,7 @@ import renderer from '@renderer'
 import router from '@router'
 import component from './component'
 import Deck from './deck'
+import { persist } from './interfaces'
 import Navigate from './navigate'
 import style from './style'
 
@@ -17,7 +18,7 @@ class Create extends HTMLElement {
   }
 
   @on.submitted('m-form', detail)
-  async persist(data) {
+  async [persist](data) {
     const deck = await Deck.create(data)
     deck.match({
       ok: ({ id }) => Navigate.goToDeck(id),

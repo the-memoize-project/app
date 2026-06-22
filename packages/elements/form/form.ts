@@ -4,7 +4,7 @@ import Echo from '@echo'
 import on, { customEvent, formData, prevent, stop } from '@event'
 import { Hidden, Template } from '@mixin'
 import component from './component'
-import { render, resetted, submitted } from './interfaces'
+import { resetted, submitted } from './interfaces'
 import interpolate from './interpolate'
 import style from './style'
 
@@ -29,10 +29,8 @@ class Form extends Echo(Hidden(Template(HTMLElement))) {
 
   @connected
   @repaint
-  [render](payload) {
-    requestAnimationFrame(() => {
-      this.#textContent = interpolate(super.template, payload)
-    })
+  render(payload) {
+    this.#textContent = interpolate(super.template, payload)
     return this
   }
 

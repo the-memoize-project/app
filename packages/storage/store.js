@@ -51,14 +51,14 @@ class Store {
         Mode.READ_ONLY,
       )
       const store = transaction.objectStore(this.#storeName)
-      const found = id ? store.get(id) : store.getAll()
+      const found = id ? store.get(Number(id)) : store.getAll()
 
       found.onsuccess = () => resolve({ data: found.result })
       found.onerror = () => reject({ error: found.error })
     })
   }
 
-  update(id, data) {
+  put(id, data) {
     return new Promise((resolve, reject) => {
       const transaction = this.#database.transaction(
         this.#storeName,

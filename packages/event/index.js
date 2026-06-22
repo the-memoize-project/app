@@ -1,4 +1,5 @@
 export { default as customEvent } from './customEvent'
+export { default as dataset } from './dataset'
 export { default as detail } from './detail'
 export { default } from './event'
 export { default as files } from './files'

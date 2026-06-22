@@ -11,7 +11,7 @@ class Deck {
   static async update(data) {
     const db = await DB.open()
     const id = Number(data.id)
-    const { error } = await db.deck.update(id, { ...data, id })
+    const { error } = await db.deck.put(id, { ...data, id })
     return error ? Result.error(error) : Result.ok({ ...data, id })
   }
 }

@@ -36,11 +36,11 @@ class Query {
     return this
   }
 
-  async update(data) {
+  async put(data) {
     const collected = await this.#store.get()
     const filtered = this.#filter.reduce(collected)
     await Promise.all(
-      filtered.map((record) => this.#store.update(record.id, data)),
+      filtered.map((record) => this.#store.put(record.id, data)),
     )
   }
 

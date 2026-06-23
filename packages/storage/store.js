@@ -37,9 +37,9 @@ class Store {
         Mode.READ_WRITE,
       )
       const store = transaction.objectStore(this.#storeName)
-      const removed = store.delete(id)
+      const removed = store.delete(Number(id))
 
-      removed.onsuccess = () => resolve({ data: null })
+      removed.onsuccess = () => resolve({ data: removed.result })
       removed.onerror = () => reject({ error: removed.error })
     })
   }
@@ -65,12 +65,12 @@ class Store {
         Mode.READ_WRITE,
       )
       const store = transaction.objectStore(this.#storeName)
-      const found = store.get(id)
+      const found = store.get(Number(id))
 
       found.onsuccess = () => {
         const saved = store.put({ ...found.result, ...data })
 
-        saved.onsuccess = () => resolve({ data: null })
+        saved.onsuccess = () => resolve({ data: saved.result })
         saved.onerror = () => reject({ error: saved.error })
       }
 

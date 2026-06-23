@@ -1,20 +1,21 @@
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
+import { customEvent } from '@event'
 import { Headless } from '@mixin'
 import DB from '@storage'
 
 @define('m-dataset')
 class Dataset extends Headless(Echo(HTMLElement)) {
-  #name
+  #store
   #upsert
 
-  get name() {
-    return (this.#name ??= '')
+  get store() {
+    return (this.#store ??= '')
   }
 
-  @attributeChanged('name')
-  set name(value) {
-    this.#name = value
+  @attributeChanged('store')
+  set store(value) {
+    this.#store = value
   }
 
   get upsert() {
@@ -28,22 +29,28 @@ class Dataset extends Headless(Echo(HTMLElement)) {
 
   async add(data) {
     const db = await DB.open()
-    return db[this.name].add(data)
+    const { data: created, error } = db[this.store].add(data)
+    error
+      ? this.dispatchEvent(customEvent('failed', error))
+      : this.dispatchEvent(customEvent('created', created))
+    return this
   }
 
   async delete(id) {
     const db = await DB.open()
-    return db[this.name].delete(id)
-  }
-
-  async get(id) {
-    const db = await DB.open()
-    return db[this.name].get(id)
+    const { data: removed, error } = db[this.store].delete(id)
+    error
+      ? this.dispatchEvent(customEvent('failed', error))
+      : this.dispatchEvent(customEvent('removed', removed))
+    return this
   }
 
   async put(data) {
     const db = await DB.open()
-    return db[this.name].update(data[this.upsert], data)
+    const { data: saved, error } = db[this.store].put(data[this.upsert], data)
+    error
+      ? this.dispatchEvent(customEvent('failed', error))
+      : this.dispatchEvent(customEvent('saved', saved))
   }
 }
 

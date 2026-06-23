@@ -8,7 +8,7 @@ class Filter {
   reduce(records) {
     return records.filter((record) =>
       Object.entries(this.#fields).every(
-        ([field, value]) => record[field] === value,
+        ([key, value]) => record[key] == value,
       ),
     )
   }

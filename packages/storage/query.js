@@ -1,6 +1,6 @@
-import Filter from './filter.js'
-import Limit from './limit.js'
-import Order from './order.js'
+import Filter from './filter'
+import Limit from './limit'
+import Order from './order'
 
 class Query {
   #filter = new Filter()
@@ -13,17 +13,26 @@ class Query {
   }
 
   async delete() {
-    const collected = await this.#store.get()
+    const { data: collected, error } = await this.#store.get()
+
+    if (error) return { error }
+
     const filtered = this.#filter.reduce(collected)
     await Promise.all(filtered.map((record) => this.#store.delete(record.id)))
+
+    return { data: true }
   }
 
   async get() {
-    const collected = await this.#store.get()
+    const { data: collected, error } = await this.#store.get()
+
+    if (error) return { error }
+
     const filtered = this.#filter.reduce(collected)
     const ordered = this.#order.reduce(filtered)
     const limited = this.#limit.reduce(ordered)
-    return limited
+
+    return { data: limited }
   }
 
   limit(count) {
@@ -37,11 +46,16 @@ class Query {
   }
 
   async put(data) {
-    const collected = await this.#store.get()
+    const { data: collected, error } = await this.#store.get()
+
+    if (error) return { error }
+
     const filtered = this.#filter.reduce(collected)
     await Promise.all(
       filtered.map((record) => this.#store.put(record.id, data)),
     )
+
+    return { data: true }
   }
 
   where(fields) {

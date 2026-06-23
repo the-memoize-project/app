@@ -1,13 +1,12 @@
 import { html } from '@dom'
 import { params, urlFor } from '@router'
-import { state } from './interfaces'
 
-const component = ({ [state]: deck }) =>
+const component = () =>
   html`
     <m-header>
       <m-button name="back-to-deck" slot="leading" variant="icon">
         <m-icon use="arrow_back" size="sm" color="primary"></m-icon>
-        <m-redirect on="back-to-deck/clicked:method/go" href="${urlFor('deck', { id: deck.id })}"></m-redirect>
+        <m-redirect on="back-to-deck/clicked:method/go" href="${urlFor('deck', params)}"></m-redirect>
       </m-button>
     </m-header>
     <main>
@@ -15,7 +14,7 @@ const component = ({ [state]: deck }) =>
         <m-text size="xxxs" color="master">Deck</m-text>
         <m-text size="md" family="highlight" weight="bold">Editar coleção</m-text>
       </header>
-      <m-form>
+      <m-form on="m-dataset/finded:method/render">
         <template>
           <m-input name="id" value="{id}" hidden></m-input>
           <m-fileupload name="cover" file="{cover}" width="fill" required>
@@ -33,10 +32,10 @@ const component = ({ [state]: deck }) =>
           </m-textarea>
           <m-button width="100%">Salvar coleção</m-button>
         </template>
-        <m-on value="m-dataset/finded:method/render"></m-on>
       </m-form>
-      <m-dataset name="deck">
-        <m-find value="${params.id}"></m-find>
+      <m-dataset store="deck" on="m-form/submitted:method/put">
+        <m-find key="id" value="${params.id}"></m-find>
+        <m-redirect on="m-dataset/saved:method/go" href="${urlFor('deck', params)}"></m-redirect>
       </m-dataset>
     </main>
     <m-footer>

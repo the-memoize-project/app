@@ -1,6 +1,6 @@
 import { define } from '@directive'
 import { paint, willPaint } from '@dom'
-import on, { detail } from '@event'
+// import on, { detail } from '@event'
 import renderer from '@renderer'
 import router, { params } from '@router'
 import component from './component'
@@ -31,7 +31,7 @@ class Edit extends HTMLElement {
     return this
   }
 
-  @on.submitted('m-form', detail)
+  // @on.submitted('m-form', detail)
   async [persist](data) {
     const id = Number(data.id)
     const deck = await Deck.update({ ...data, id })

@@ -33,6 +33,7 @@
       "recommended": true,
       "suspicious": {
         "noAssignInExpressions": "off",
+        "noDoubleEquals": "off",
         "useIterableCallbackReturn": "off"
       }
     }

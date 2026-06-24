@@ -29,7 +29,7 @@ class Dataset extends Headless(Echo(HTMLElement)) {
 
   async add(data) {
     const db = await DB.open()
-    const { data: created, error } = db[this.store].add(data)
+    const { data: created, error } = await db[this.store].add(data)
     error
       ? this.dispatchEvent(customEvent('failed', error))
       : this.dispatchEvent(customEvent('created', created))
@@ -38,7 +38,7 @@ class Dataset extends Headless(Echo(HTMLElement)) {
 
   async delete(id) {
     const db = await DB.open()
-    const { data: removed, error } = db[this.store].delete(id)
+    const { data: removed, error } = await db[this.store].delete(id)
     error
       ? this.dispatchEvent(customEvent('failed', error))
       : this.dispatchEvent(customEvent('removed', removed))
@@ -47,7 +47,10 @@ class Dataset extends Headless(Echo(HTMLElement)) {
 
   async put(data) {
     const db = await DB.open()
-    const { data: saved, error } = db[this.store].put(data[this.upsert], data)
+    const { data: saved, error } = await db[this.store].put(
+      data[this.upsert],
+      data,
+    )
     error
       ? this.dispatchEvent(customEvent('failed', error))
       : this.dispatchEvent(customEvent('saved', saved))

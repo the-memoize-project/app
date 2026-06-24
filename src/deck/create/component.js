@@ -14,7 +14,7 @@ const component = () =>
         <m-text size="xxxs" color="master">Deck</m-text>
         <m-text size="md" family="highlight" weight="bold">Nova da coleção</m-text>
       </header>
-      <m-form>
+      <m-form autorender>
         <template>
           <m-fileupload name="cover" width="fill" required>
             <m-label>Imagem de Capa</m-label>
@@ -32,6 +32,9 @@ const component = () =>
           <m-button width="100%">Criar coleção</m-button>
         </template>
       </m-form>
+      <m-dataset store="deck" on="m-form/submitted:method/add">
+        <m-redirect on="m-dataset/created:method/go" route="deck"></m-redirect>
+      </m-dataset>
     </main>
     <m-footer>
       <m-text slot="leading" size="xxxs">© 2025 Memoize. Todos os direitos reservados.</m-text>

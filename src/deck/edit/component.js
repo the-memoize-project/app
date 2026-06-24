@@ -33,6 +33,10 @@ const component = () =>
           <m-button width="100%">Salvar coleção</m-button>
         </template>
       </m-form>
+      <m-button color="danger" variant="link">
+        <m-icon use="delete" size="sm"></m-icon>
+        Excluir
+      </m-button>
       <m-dataset store="deck" on="m-form/submitted:method/put">
         <m-find key="id" value="${params.id}"></m-find>
         <m-redirect on="m-dataset/saved:method/go" href="${urlFor('deck', params)}"></m-redirect>

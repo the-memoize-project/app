@@ -1,18 +1,29 @@
 import { connected, define } from '@directive'
+import attributeChanged, { booleanAttribute } from '@directive/attributeChanged'
 import { paint, repaint } from '@dom'
 import Echo from '@echo'
 import on, { customEvent, formData, prevent, stop } from '@event'
 import { Hidden, Template } from '@mixin'
 import component from './component'
-import { resetted, submitted } from './interfaces'
+import { rendered, resetted, submitted } from './interfaces'
 import interpolate from './interpolate'
 import style from './style'
 
 @define('m-form')
 @paint(component, style)
 class Form extends Echo(Hidden(Template(HTMLElement))) {
+  #autorender
   #internals
   #textContent
+
+  get autorender() {
+    return (this.#autorender ??= false)
+  }
+
+  @attributeChanged('autorender', booleanAttribute)
+  set autorender(value) {
+    this.#autorender = value
+  }
 
   get internals() {
     return (this.#internals ??= this.attachInternals())
@@ -27,10 +38,15 @@ class Form extends Echo(Hidden(Template(HTMLElement))) {
     this.attachShadow({ mode: 'open' })
   }
 
-  @connected
   @repaint
-  render(payload) {
-    this.#textContent = interpolate(super.template, payload)
+  render(data) {
+    this.#textContent = interpolate(super.template, data)
+    return this
+  }
+
+  @connected
+  [rendered]() {
+    if (this.autorender) this.render()
     return this
   }
 

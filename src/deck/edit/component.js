@@ -1,5 +1,5 @@
 import { html } from '@dom'
-import { params, urlFor } from '@router'
+import { params } from '@router'
 
 const component = () =>
   html`
@@ -14,7 +14,7 @@ const component = () =>
         <m-text size="xxxs" color="master">Deck</m-text>
         <m-text size="md" family="highlight" weight="bold">Editar coleção</m-text>
       </header>
-      <m-form on="m-dataset/finded:method/render">
+      <m-form name="edit" on="deck/finded:method/render">
         <template>
           <m-input name="id" value="{id}" hidden></m-input>
           <m-fileupload name="cover" file="{cover}" width="fill" required>
@@ -33,13 +33,16 @@ const component = () =>
           <m-button width="100%">Salvar coleção</m-button>
         </template>
       </m-form>
-      <m-button color="danger" variant="link">
+      <m-button name="delete" value="${params.id}" color="danger" variant="link">
         <m-icon use="delete" size="sm"></m-icon>
         Excluir
       </m-button>
-      <m-dataset store="deck" on="m-form/submitted:method/put">
+      <m-dataset name="deck" store="deck">
         <m-find key="id" value="${params.id}"></m-find>
-        <m-redirect on="m-dataset/saved:method/go" href="${urlFor('deck', params)}"></m-redirect>
+        <m-on value="edit/submitted:method/put"></m-on>
+        <m-on value="delete/clicked:method/delete"></m-on>
+        <m-redirect on="deck/saved:method/go" route="deck"></m-redirect>
+        <m-redirect on="deck/removed:method/go" route="dashboard"></m-redirect>
       </m-dataset>
     </main>
     <m-footer>

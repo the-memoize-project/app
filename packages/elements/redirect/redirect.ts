@@ -1,10 +1,12 @@
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
 import { Headless } from '@mixin'
+import { urlFor } from '@router'
 
 @define('m-redirect')
 class Redirect extends Headless(Echo(HTMLElement)) {
   #href
+  #route
 
   get href() {
     return (this.#href ??= '#')
@@ -15,8 +17,19 @@ class Redirect extends Headless(Echo(HTMLElement)) {
     this.#href = value
   }
 
-  go() {
-    history.pushState({}, '', this.href)
+  get route() {
+    return (this.#route ??= '')
+  }
+
+  @attributeChanged('route')
+  set route(value) {
+    this.#route = value
+  }
+
+  go(params) {
+    this.route
+      ? history.pushState({}, '', urlFor(this.route, params))
+      : history.pushState({}, '', this.href)
     return this
   }
 }

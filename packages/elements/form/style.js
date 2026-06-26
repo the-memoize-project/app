@@ -1,7 +1,7 @@
 import { css } from '@dom'
 
-const style = () =>
-  css`
+function style() {
+  return css`
     :host {
       display: flex;
       width: 100%;
@@ -19,5 +19,6 @@ const style = () =>
       display: none;
     }
   `
+}
 
 export default style

@@ -3,6 +3,7 @@ import { css } from '@dom'
 function style(self) {
   return css`
     :host {
+      box-sizing: border-box;
       color: ${self.color};
       direction: ltr;
       display: inline-flex;

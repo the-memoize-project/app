@@ -1,5 +1,5 @@
-function component(self) {
-  return self.use
+function component(icon) {
+  return icon.use
 }
 
 export default component

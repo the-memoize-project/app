@@ -1,2 +1,0 @@
-export const hydrate = Symbol('hydrate')
-export const state = Symbol('state')

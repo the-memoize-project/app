@@ -1,7 +1,7 @@
 import { css } from '@dom'
 
-const style = () =>
-  css`
+function style() {
+  return css`
     :host {
       box-sizing: border-box;
       width: 100%;
@@ -29,5 +29,6 @@ const style = () =>
       }
     }
   `
+}
 
 export default style

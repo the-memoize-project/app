@@ -1,7 +1,7 @@
 import { css } from '@dom'
 
-const style = () =>
-  css`
+function style() {
+  return css`
     :host {
       box-sizing: border-box;
       color: var(--color-master-dark);
@@ -13,5 +13,6 @@ const style = () =>
       text-align: left;
     }
   `
+}
 
 export default style

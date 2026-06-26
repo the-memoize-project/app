@@ -1,8 +1,7 @@
 import { html } from '@dom'
 import { urlFor } from '@router'
-import { state } from './interfaces'
 
-const component = ({ [state]: decks }) =>
+const component = () =>
   html`
     <header>
       <m-text size="xs" family="highlight" weight="bold">Coleções</m-text>
@@ -11,21 +10,20 @@ const component = ({ [state]: decks }) =>
         <m-redirect on="create-deck/clicked:method/go" href="${urlFor('createDeck')}"></m-redirect>
       </m-button>
     </header>
-    <shelf>
-      ${decks.map(
-        (deck) => html`
-          <deck data-id="${deck.id}">
-            <thumbnail>
-              <img src="${deck.cover}" alt="${deck.name}" />
-            </thumbnail>
-            <progressbar>
-              <fill style="width: 0%"></fill>
-            </progressbar>
-            <m-text size="xxs" weight="medium">${deck.name}</m-text>
-          </deck>
-        `,
-      )}
-    </shelf>
+    <m-render layout="grid" on="m-dataset/loaded:method/render">
+      <template>
+        <m-card>
+          <m-inset side="top">
+            <m-cover src="{cover}" alt="{name}"></m-cover>
+          </m-inset>
+          <m-progressbar value="30"></m-progressbar>
+          <m-text size="xxs" weight="medium">{name}</m-text>
+        </m-card>
+      </template>
+    </m-render>
+    <m-dataset store="deck">
+      <m-load></m-load>
+    </m-dataset>
   `
 
 export default component

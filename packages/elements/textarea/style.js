@@ -1,7 +1,7 @@
 import { css } from '@dom'
 
-const style = (textarea) =>
-  css`
+function style(textarea) {
+  return css`
     :host {
       align-items: start;
       box-sizing: border-box;
@@ -73,5 +73,6 @@ const style = (textarea) =>
       }
     }
   `
+}
 
 export default style

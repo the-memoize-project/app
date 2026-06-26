@@ -1,15 +1,15 @@
 import { define } from '@directive'
 import { paint } from '@dom'
-import component from './component'
-import style from './style'
+import component from './component.js'
+import style from './style.js'
 
-@define('m-dashboard-shelf')
+@define('m-main')
 @paint(component, style)
-class Shelf extends HTMLElement {
+class Main extends HTMLElement {
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
   }
 }
 
-export default Shelf
+export default Main

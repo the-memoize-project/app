@@ -1,12 +1,12 @@
 import { html } from '@dom'
-import { params } from '@router'
+import { params, urlFor } from '@router'
 
 const component = () =>
   html`
     <m-header>
       <m-button name="back-to-deck" slot="leading" variant="icon">
         <m-icon use="arrow_back" size="sm" color="primary"></m-icon>
-        <m-redirect on="back-to-deck/clicked:method/go" href="${urlFor('deck', params)}"></m-redirect>
+        <m-redirect on="back-to-deck/clicked:method/go" href="${urlFor('deck', { id: params.id })}"></m-redirect>
       </m-button>
     </m-header>
     <main>
@@ -14,7 +14,7 @@ const component = () =>
         <m-text size="xxxs" color="master">Deck</m-text>
         <m-text size="md" family="highlight" weight="bold">Editar coleção</m-text>
       </header>
-      <m-form name="edit" on="deck/finded:method/render">
+      <m-form on="m-dataset/finded:method/render">
         <template>
           <m-input name="id" value="{id}" hidden></m-input>
           <m-fileupload name="cover" file="{cover}" width="fill" required>
@@ -34,15 +34,15 @@ const component = () =>
         </template>
       </m-form>
       <m-button name="delete" value="${params.id}" color="danger" variant="link">
-        <m-icon use="delete" size="sm"></m-icon>
+        <m-icon use="delete"></m-icon>
         Excluir
       </m-button>
-      <m-dataset name="deck" store="deck">
+      <m-dataset store="deck">
         <m-find key="id" value="${params.id}"></m-find>
-        <m-on value="edit/submitted:method/put"></m-on>
+        <m-on value="m-form/submitted:method/put"></m-on>
         <m-on value="delete/clicked:method/delete"></m-on>
-        <m-redirect on="deck/saved:method/go" route="deck"></m-redirect>
-        <m-redirect on="deck/removed:method/go" route="dashboard"></m-redirect>
+        <m-redirect route="deck" on="m-dataset/saved:method/go"></m-redirect>
+        <m-redirect route="dashboard" on="m-dataset/removed:method/go"></m-redirect>
       </m-dataset>
     </main>
     <m-footer>

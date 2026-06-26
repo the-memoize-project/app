@@ -70,7 +70,13 @@ class Store {
       found.onsuccess = () => {
         const saved = store.put({ ...found.result, ...data })
 
-        saved.onsuccess = () => resolve({ data: saved.result })
+        saved.onsuccess = () => {
+          const found = store.get(saved.result)
+
+          found.onsuccess = () => resolve({ data: found.result })
+          found.onerror = () => reject({ error: found.error })
+        }
+
         saved.onerror = () => reject({ error: saved.error })
       }
 

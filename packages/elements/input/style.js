@@ -1,7 +1,7 @@
 import { css } from '@dom'
 
-const style = (input) =>
-  css`
+function style(input) {
+  return css`
 		:host {
 			align-items: start;
 			box-sizing: border-box;
@@ -76,5 +76,6 @@ const style = (input) =>
 			}
 		}
 	`
+}
 
 export default style

@@ -2,7 +2,7 @@ import { css } from '@dom'
 
 function style() {
   return css`
-    main {
+    :host {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -12,12 +12,6 @@ function style() {
       min-height: calc(100svh - 144px);
       padding: var(--spacing_inset-xs);
       width: 100%;
-
-      header {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing_inset-quarck);
-      }
     }
   `
 }

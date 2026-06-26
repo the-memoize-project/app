@@ -47,10 +47,12 @@ class Dataset extends Headless(Echo(HTMLElement)) {
 
   async put(data) {
     const db = await DB.open()
-    const { data: saved, error } = await db[this.store].put(
-      data[this.upsert],
-      data,
-    )
+    const id = data[this.upsert]
+
+    delete data[this.upsert]
+
+    const { data: saved, error } = await db[this.store].put(id, data)
+
     error
       ? this.dispatchEvent(customEvent('failed', error))
       : this.dispatchEvent(customEvent('saved', saved))
